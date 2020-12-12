@@ -6,7 +6,7 @@
   <link href="https://www.tama.me/blog/atom.xml" rel="self"/>
   
   <link href="https://www.tama.me/blog/"/>
-  <updated>2020-12-12T06:41:05.302Z</updated>
+  <updated>2020-12-12T06:46:58.258Z</updated>
   <id>https://www.tama.me/blog/</id>
   
   <author>
@@ -21,18 +21,15 @@
     <link href="https://www.tama.me/blog/2020/12/12/op-tee-raspberry-pi-3/"/>
     <id>https://www.tama.me/blog/2020/12/12/op-tee-raspberry-pi-3/</id>
     <published>2020-12-12T02:18:19.000Z</published>
-    <updated>2020-12-12T06:41:05.302Z</updated>
+    <updated>2020-12-12T06:46:58.258Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the</summary>
-        
-      
+    <summary type="html">&lt;p&gt;In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness. &lt;/p&gt;
+&lt;p&gt;However, as a former mobile software engineer, it is struggling to understand the TrustZone and find a way to manipulate it since most of my work was to interact with the system and SDK. What’s even worse, most of the tutorials require Juno Development kit or HiKey, which are not easy to get. At present, there’s only a set of Raspberry Pi 3Bs in the lab. &lt;/p&gt;</summary>
     
     
+    
+    <category term="System" scheme="https://www.tama.me/blog/categories/System/"/>
     
     
     <category term="op-tee, TrustZone, raspberry pi" scheme="https://www.tama.me/blog/tags/op-tee-TrustZone-raspberry-pi/"/>

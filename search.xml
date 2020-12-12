@@ -5,6 +5,7 @@
     <url>/blog/2020/12/12/op-tee-raspberry-pi-3/</url>
     <content><![CDATA[<p>In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness. </p>
 <p>However, as a former mobile software engineer, it is struggling to understand the TrustZone and find a way to manipulate it since most of my work was to interact with the system and SDK. What’s even worse, most of the tutorials require Juno Development kit or HiKey, which are not easy to get. At present, there’s only a set of Raspberry Pi 3Bs in the lab. </p>
+<a id="more"></a>
 <p>Raspberry Pi does not support the TrustZone by default. However, there is a project, OP-TEE, suits well with this purpose. OP-TEE support HiKey960 and HiKey620 boards by default, and its building tutorial is based on these boards. I referenced this <a href="http://www.debugme.co.kr/2017/04/op-tee-for-raspberry-pi-3-model-b.html">Korean tutorial</a> to build it. </p>
 <p>The following steps are my walkthrough.</p>
 <h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>OP-TEE is an open-sourced implementation of the Trusted Execution Environment(TEE) with TrustZone technology. It provides a secure zone for trusted application and confidential data. OP-TEE includes:</p>
@@ -56,6 +57,9 @@
 </ol>
 <p>You can also reference <a href="https://optee.readthedocs.io/en/latest/building/gits/build.html">the official</a> tutorial to build and test this project.</p>
 ]]></content>
+      <categories>
+        <category>System</category>
+      </categories>
       <tags>
         <tag>op-tee, TrustZone, raspberry pi</tag>
       </tags>

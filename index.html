@@ -182,7 +182,16 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-12 12:48:19 / Modified: 17:11:05" itemprop="dateCreated datePublished" datetime="2020-12-12T12:48:19+10:30">2020-12-12</time>
+              <time title="Created: 2020-12-12 12:48:19 / Modified: 17:16:58" itemprop="dateCreated datePublished" datetime="2020-12-12T12:48:19+10:30">2020-12-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/System/" itemprop="url" rel="index"><span itemprop="name">System</span></a>
+                </span>
             </span>
 
           
@@ -205,57 +214,14 @@
       
           <p>In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness. </p>
 <p>However, as a former mobile software engineer, it is struggling to understand the TrustZone and find a way to manipulate it since most of my work was to interact with the system and SDK. What’s even worse, most of the tutorials require Juno Development kit or HiKey, which are not easy to get. At present, there’s only a set of Raspberry Pi 3Bs in the lab. </p>
-<p>Raspberry Pi does not support the TrustZone by default. However, there is a project, OP-TEE, suits well with this purpose. OP-TEE support HiKey960 and HiKey620 boards by default, and its building tutorial is based on these boards. I referenced this <a target="_blank" rel="noopener" href="http://www.debugme.co.kr/2017/04/op-tee-for-raspberry-pi-3-model-b.html">Korean tutorial</a> to build it. </p>
-<p>The following steps are my walkthrough.</p>
-<h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>OP-TEE is an open-sourced implementation of the Trusted Execution Environment(TEE) with TrustZone technology. It provides a secure zone for trusted application and confidential data. OP-TEE includes:</p>
-<ul>
-<li>Secure OS</li>
-<li>Rich OS level client application</li>
-<li>Secure OS level trusted application</li>
-<li>kernel driver</li>
-<li>ARM Trusted Firmware(ATF), which provides ways to the kernel driver.</li>
-</ul>
-<p>OP-TEE supports QEMU and ARM boards including ARM Juno, Raspberry Pi 3, HiKey, STMicroelectronics, etc.</p>
-<p>However, the Raspberry Pi 3’s ATF and OP-TEE are not virtually secure. Though the processor(BCM2837) of it supports Exception Status, other secure functions including secure boot, secure memory and peripherals are not supported. Moreover, OP-TEE only provides a simple prototype.</p>
-<h2 id="Building-OP-TEE-for-Raspberry-Pi-3-3B"><a href="#Building-OP-TEE-for-Raspberry-Pi-3-3B" class="headerlink" title="Building OP-TEE for Raspberry Pi 3/3B"></a>Building OP-TEE for Raspberry Pi 3/3B</h2><ol>
-<li>We will use the <a target="_blank" rel="noopener" href="https://source.android.com/setup/build/downloading"><em>repo</em></a> of Google AOSP for code management.</li>
-<li>If you are using Ubuntu, the following packages should be installed</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3 android-tools-adb android-tools-fastboot autoconf \</span><br><span class="line"> automake bc bison build-essential cscope curl device-tree-compiler flex \</span><br><span class="line"> ftp-upload gdisk iasl libattr1-dev libc6:i386 libcap-dev libfdt-dev \</span><br><span class="line"> libftdi-dev libglib2.0-dev libhidapi-dev libncurses5-dev \</span><br><span class="line"> libpixman-1-dev libssl-dev libstdc++6:i386 libtool libz1:i386 make \</span><br><span class="line"> mtools netcat unzip uuid-dev libmagickwand-dev\</span><br><span class="line"> xdg-utils xterm xz-utils zlib1g-dev</span><br><span class="line"></span><br><span class="line">$ python3 -m pip install pycrypto pyserial Wand</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>Download the source code of OP-TEE for Raspberry Pi 3/3B.</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ~/optee</span><br><span class="line">$ <span class="built_in">cd</span> ~/optee</span><br><span class="line">$ repo init -u https://github.com/OP-TEE/manifest.git -m rpi3.xml</span><br><span class="line">$ repo sync</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>make toolchains</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> build</span><br><span class="line">$ make toolchains</span><br></pre></td></tr></table></figure>
-
-<p>Commands above download and unarchive linux kernal packages and toolchains.</p>
-<ol start="5">
-<li>Build</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make all</span><br></pre></td></tr></table></figure>
-
-<p>The following targes will be built.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">rpi3-firmware</span><br><span class="line"></span><br><span class="line">optee-os</span><br><span class="line">    </span><br><span class="line">arm-tf</span><br><span class="line">    </span><br><span class="line">optee-client</span><br><span class="line">    </span><br><span class="line">xtest</span><br><span class="line">    </span><br><span class="line">u-boot</span><br><span class="line">   </span><br><span class="line">u-boot-jtag-bin</span><br><span class="line">    </span><br><span class="line">linux</span><br><span class="line">    </span><br><span class="line">update_rootfs</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<p>During the build, the following errors may occure:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ld: scripts&#x2F;dtc&#x2F;dtc-parser.tab.o:(.bss+0x10): multiple definition of &#96;yylloc&#39;; scripts&#x2F;dtc&#x2F;dtc-lexer.lex.o:(.bss+0x0): first defined here</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[3]: *** [scripts&#x2F;Makefile.host:106: scripts&#x2F;dtc&#x2F;dtc] Error 1</span><br><span class="line">make[2]: *** [scripts&#x2F;Makefile.build:432: scripts&#x2F;dtc] Error 2</span><br><span class="line">make[1]: *** [Makefile:508: scripts] Error 2</span><br><span class="line">make[1]: Leaving directory &#39;~&#x2F;optee&#x2F;u-boot&#39;</span><br><span class="line">make: *** [Makefile:91: u-boot] Error 2</span><br></pre></td></tr></table></figure>
-
-<p>According to <a target="_blank" rel="noopener" href="https://www.reddit.com/r/LineageOS/comments/hkq8ah/multiple_definitions_error_in_dtc_tool_when/">this page</a>, we can simply remove the codes shown in <a target="_blank" rel="noopener" href="https://github.com/Tomoms/android_kernel_oppo_msm8974/commit/11647f99b4de6bc460e106e876f72fc7af3e54a6">this solution</a> to solve this problem.</p>
-<ol start="6">
-<li>Flash into the sd card</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make flash</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>Test</li>
-</ol>
-<p>You can also reference <a target="_blank" rel="noopener" href="https://optee.readthedocs.io/en/latest/building/gits/build.html">the official</a> tutorial to build and test this project.</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/12/12/op-tee-raspberry-pi-3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -339,6 +305,12 @@
           <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
         <span class="site-state-item-count">1</span>
