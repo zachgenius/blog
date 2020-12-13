@@ -6,7 +6,7 @@
   <link href="https://www.tama.me/blog/atom.xml" rel="self"/>
   
   <link href="https://www.tama.me/blog/"/>
-  <updated>2020-12-13T03:10:00.483Z</updated>
+  <updated>2020-12-13T23:14:26.248Z</updated>
   <id>https://www.tama.me/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.tama.me/blog/2020/12/12/op-tee-raspberry-pi-3/"/>
     <id>https://www.tama.me/blog/2020/12/12/op-tee-raspberry-pi-3/</id>
     <published>2020-12-12T02:18:19.000Z</published>
-    <updated>2020-12-13T03:10:00.483Z</updated>
+    <updated>2020-12-13T23:14:26.248Z</updated>
     
     
     <summary type="html">&lt;p&gt;In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness. &lt;/p&gt;

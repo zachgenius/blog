@@ -29,7 +29,7 @@
 <meta property="og:description" content="In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-12T02:18:19.000Z">
-<meta property="article:modified_time" content="2020-12-13T03:10:00.483Z">
+<meta property="article:modified_time" content="2020-12-13T23:14:26.248Z">
 <meta property="article:author" content="Zach Wang">
 <meta property="article:tag" content="op-tee, TrustZone, raspberry pi">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-13 13:40:00" itemprop="dateModified" datetime="2020-12-13T13:40:00+10:30">2020-12-13</time>
+                <time title="Modified: 2020-12-14 09:44:26" itemprop="dateModified" datetime="2020-12-14T09:44:26+10:30">2020-12-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,6 +228,7 @@
 <a id="more"></a>
 <p>Raspberry Pi does not support the TrustZone by default. However, there is a project, OP-TEE, suits well with this purpose. OP-TEE support HiKey960 and HiKey620 boards by default, and its building tutorial is based on these boards. I referenced this <a target="_blank" rel="noopener" href="http://www.debugme.co.kr/2017/04/op-tee-for-raspberry-pi-3-model-b.html">Korean tutorial</a> to build it. </p>
 <p>The following steps are my walkthrough.</p>
+<p><strong>Note: Please build the project under non-Windows system, in metal bare or virtual machine, since there’re critical bugs building in Windows. If you don’t want to waste centuries of time, do it in Ubuntu</strong></p>
 <h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>OP-TEE is an open-sourced implementation of the Trusted Execution Environment(TEE) with TrustZone technology. It provides a secure zone for trusted application and confidential data. OP-TEE includes:</p>
 <ul>
 <li>Secure OS</li>
@@ -242,7 +243,7 @@
 <li>We will use the <a target="_blank" rel="noopener" href="https://source.android.com/setup/build/downloading"><em>repo</em></a> of Google AOSP for code management.</li>
 <li>If you are using Ubuntu, the following packages should be installed</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3 android-tools-adb android-tools-fastboot autoconf \</span><br><span class="line"> automake bc bison build-essential cscope curl device-tree-compiler flex \</span><br><span class="line"> ftp-upload gdisk iasl libattr1-dev libc6:i386 libcap-dev libfdt-dev \</span><br><span class="line"> libftdi-dev libglib2.0-dev libhidapi-dev libncurses5-dev \</span><br><span class="line"> libpixman-1-dev libssl-dev libstdc++6:i386 libtool libz1:i386 make \</span><br><span class="line"> mtools netcat unzip uuid-dev libmagickwand-dev\</span><br><span class="line"> xdg-utils xterm xz-utils zlib1g-dev</span><br><span class="line"></span><br><span class="line">$ python3 -m pip install pycrypto pyserial Wand</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python3 python3-pip android-tools-adb android-tools-fastboot autoconf \</span><br><span class="line"> automake bc bison build-essential cscope curl device-tree-compiler flex \</span><br><span class="line"> ftp-upload gdisk iasl libattr1-dev libc6:i386 libcap-dev libfdt-dev \</span><br><span class="line"> libftdi-dev libglib2.0-dev libhidapi-dev libncurses5-dev \</span><br><span class="line"> libpixman-1-dev libssl-dev libstdc++6:i386 libtool libz1:i386 make \</span><br><span class="line"> mtools netcat unzip uuid-dev libmagickwand-dev\</span><br><span class="line"> xdg-utils xterm xz-utils zlib1g-dev</span><br><span class="line"></span><br><span class="line">$ python3 -m pip install pycrypto pyserial Wand</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>Download the source code of OP-TEE for Raspberry Pi 3/3B.</li>
