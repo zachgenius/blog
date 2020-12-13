@@ -47,6 +47,9 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ld: scripts&#x2F;dtc&#x2F;dtc-parser.tab.o:(.bss+0x10): multiple definition of &#96;yylloc&#39;; scripts&#x2F;dtc&#x2F;dtc-lexer.lex.o:(.bss+0x0): first defined here</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[3]: *** [scripts&#x2F;Makefile.host:106: scripts&#x2F;dtc&#x2F;dtc] Error 1</span><br><span class="line">make[2]: *** [scripts&#x2F;Makefile.build:432: scripts&#x2F;dtc] Error 2</span><br><span class="line">make[1]: *** [Makefile:508: scripts] Error 2</span><br><span class="line">make[1]: Leaving directory &#39;~&#x2F;optee&#x2F;u-boot&#39;</span><br><span class="line">make: *** [Makefile:91: u-boot] Error 2</span><br></pre></td></tr></table></figure>
 
 <p>According to <a href="https://www.reddit.com/r/LineageOS/comments/hkq8ah/multiple_definitions_error_in_dtc_tool_when/">this page</a>, we can simply remove the codes shown in <a href="https://github.com/Tomoms/android_kernel_oppo_msm8974/commit/11647f99b4de6bc460e106e876f72fc7af3e54a6">this solution</a> to solve this problem.</p>
+<p>Note: according to my experience, you have to re-download u-boot since there is a bug triggering the above bug in the embedded version. So, move to the project directory and run:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rm -rf u-boot</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/u-boot/u-boot.git -b v2020.10 --depth 1</span><br></pre></td></tr></table></figure>
+
 <ol start="6">
 <li>Flash into the sd card</li>
 </ol>

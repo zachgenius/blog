@@ -29,7 +29,7 @@
 <meta property="og:description" content="In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-12T02:18:19.000Z">
-<meta property="article:modified_time" content="2020-12-12T06:46:58.258Z">
+<meta property="article:modified_time" content="2020-12-13T03:10:00.483Z">
 <meta property="article:author" content="Zach Wang">
 <meta property="article:tag" content="op-tee, TrustZone, raspberry pi">
 <meta name="twitter:card" content="summary">
@@ -185,10 +185,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-12 12:48:19 / Modified: 17:16:58" itemprop="dateCreated datePublished" datetime="2020-12-12T12:48:19+10:30">2020-12-12</time>
+              <time title="Created: 2020-12-12 12:48:19" itemprop="dateCreated datePublished" datetime="2020-12-12T12:48:19+10:30">2020-12-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-13 13:40:00" itemprop="dateModified" datetime="2020-12-13T13:40:00+10:30">2020-12-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -261,6 +267,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ld: scripts&#x2F;dtc&#x2F;dtc-parser.tab.o:(.bss+0x10): multiple definition of &#96;yylloc&#39;; scripts&#x2F;dtc&#x2F;dtc-lexer.lex.o:(.bss+0x0): first defined here</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make[3]: *** [scripts&#x2F;Makefile.host:106: scripts&#x2F;dtc&#x2F;dtc] Error 1</span><br><span class="line">make[2]: *** [scripts&#x2F;Makefile.build:432: scripts&#x2F;dtc] Error 2</span><br><span class="line">make[1]: *** [Makefile:508: scripts] Error 2</span><br><span class="line">make[1]: Leaving directory &#39;~&#x2F;optee&#x2F;u-boot&#39;</span><br><span class="line">make: *** [Makefile:91: u-boot] Error 2</span><br></pre></td></tr></table></figure>
 
 <p>According to <a target="_blank" rel="noopener" href="https://www.reddit.com/r/LineageOS/comments/hkq8ah/multiple_definitions_error_in_dtc_tool_when/">this page</a>, we can simply remove the codes shown in <a target="_blank" rel="noopener" href="https://github.com/Tomoms/android_kernel_oppo_msm8974/commit/11647f99b4de6bc460e106e876f72fc7af3e54a6">this solution</a> to solve this problem.</p>
+<p>Note: according to my experience, you have to re-download u-boot since there is a bug triggering the above bug in the embedded version. So, move to the project directory and run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf u-boot</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/u-boot/u-boot.git -b v2020.10 --depth 1</span><br></pre></td></tr></table></figure>
+
 <ol start="6">
 <li>Flash into the sd card</li>
 </ol>
