@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Building and Installing OP-TEE with AOSP on a Raspberry Pi 3B</title>
-    <url>/blog/2020/12/12/op-tee-raspberry-pi-3/</url>
+    <url>/2020/12/12/op-tee-raspberry-pi-3/</url>
     <content><![CDATA[<p>In my recent research, I have to install an instrument logic into the TrustZone, where the system level codes cannot access to, of the ARM SoC to monitor the behaviours of apps without any awareness. </p>
 <p>However, as a former mobile software engineer, it is struggling to understand the principle of TrustZone and find a way to manipulate it since most of my work was to interact with the system and SDK. What’s even worse, most of the tutorials require Juno Development kit or HiKey, which are either extremely expensive or tricky to get. At present, I got a dozen of Raspberry Pi 3Bs in the lab. </p>
 <a id="more"></a>
